@@ -1,0 +1,116 @@
+syntax="proto3";
+
+package proto;
+option go_package = "pb/anggaran";
+
+message Pagination {
+  string query = 1;
+  int32 page_number = 2;
+  int32 results_per_page = 3;
+}
+
+//kegiatan
+message KegiatanRequest {
+  int32 bidang = 1;
+  int32 gedung = 2;
+  string tahun_ajaran = 4;
+  Pagination pagination = 5;
+}
+
+message Kegiatan {
+  string kode_kegiatan = 1;
+  string kode_acuan = 2;
+  string nama_kegiatan = 3;
+  int32  target_kehadiran = 4;
+  int32 target_capaian = 5;
+  string kode_kepanitiaan = 6;
+  string kode_kel_anggaran = 7;
+  string kode_kel_barang = 8;
+  string tahun_ajaran = 9;
+  bool is_kegiatan = 10;
+}
+
+message KegiatanResponse{
+  repeated Kegiatan data = 1;
+}
+
+//acuan harga
+message AcuanHargaDanStatus{
+  int32 total_acuan_anggaran = 1;
+  int32 totoal_acuan_barang = 2;
+  string c_status_anggaran = 3;
+  string c_status_barang = 4;
+}
+
+message AcuanHargaDanStatusRequest{
+  int32 gedung = 1;
+  string kode_acuan = 2;
+  string kode_kegiatan = 3;
+  string kode_kel_barang = 4;
+  int32  kota = 5;
+}
+
+message AcuanHargaDanStatusResponse{
+  AcuanHargaDanStatus data = 1;
+}
+
+message Empty{}
+
+message KegiatanIkut{
+  string kode_kegiatan = 1;
+  string nama_kegiatan = 2;
+  string bulan_kegiatan = 3;
+  string kode_kepanitiaan = 4;
+  int32 jumlah_panitia = 5;
+}
+
+message KegiatanIkutResponse{
+  repeated KegiatanIkut data = 1;
+}
+
+message KegiatanIkutRequest{
+  string kode_kegiatan = 1;
+}
+
+message ItemAnggaran{
+  string kode_kel_anggaran = 1;
+  string kode = 2;
+  string kode_item_anggaran = 3;
+  string nama_item_anggaran = 4;
+  int32 acuan_harga = 5;
+  int32 acuan_harga_max = 6;
+  int32 jumlah = 7;
+  int32 nilai_satuan = 8;
+  int32 id_satuan = 9;
+  string satuan = 10;
+  int32 total = 11;
+  int32 id_vendor = 12;
+  string nama_vendor = 13;
+  string dokumen = 14;
+  int32 pajak = 15;
+  int32 pajak_opsi = 16;
+  string list_pajak = 17;
+  string split = 18;
+}
+
+message ItemAnggaranResponse{
+  repeated ItemAnggaran data = 1;
+}
+
+message ItemAnggaranRequest{
+  string kode_kegiatan = 1;
+  string kode_kel_anggaran = 2;
+  int32 kota = 3;
+}
+
+service AnggaranService{
+  rpc GetKegiatan(KegiatanRequest) returns (KegiatanResponse);
+  rpc GetAcuanHargadanStatus(AcuanHargaDanStatusRequest) returns (AcuanHargaDanStatusResponse);
+  rpc Getkegiatanikut(KegiatanIkutRequest) returns (KegiatanIkutResponse);
+  rpc Getkepanitiaan(Empty) returns (Empty); //blum
+  rpc Setkepanitiaan(Empty) returns (Empty); //blum
+  rpc Getitemanggaran(ItemAnggaranRequest) returns (ItemAnggaranResponse);
+  rpc Getbarang(Empty) returns (Empty);
+  rpc Uploaddokumen(Empty) returns (Empty);
+  rpc Setbiayakegiatan(Empty) returns (Empty);
+}

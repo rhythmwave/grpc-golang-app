@@ -1,0 +1,6 @@
+projectKey=go-bponline
+serverUrl=http://17.8.20.28:9000
+serverVersion=10.4.0.87286
+dashboardUrl=http://17.8.20.28:9000/dashboard?id=go-bponline
+ceTaskId=056a16cc-ac01-42f7-9e4d-6c52f643e3d7
+ceTaskUrl=http://17.8.20.28:9000/api/ce/task?id=056a16cc-ac01-42f7-9e4d-6c52f643e3d7

@@ -1,0 +1,14 @@
+syntax="proto3";
+
+package proto;
+option go_package = "pb/health";
+
+message HealthReq {}
+
+message HealthRes {
+    string status = 1;
+}
+
+service HealthService {
+    rpc GetHealth(HealthReq) returns (HealthRes) {}
+}
